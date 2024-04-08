@@ -1,0 +1,27 @@
+How to Fix GitHub Error Permission Denied (publickey) |Fatal: Could Not Read From Remote Repository
+
+git@github.com: Permission denied (publicKey).
+fatal: Could not read from remote repository.
+
+Pleas make sure you have the correct access rights and the repository exists.
+
+**First Solution: 
+if (-not(Test-Path "$env:USERPROFILE\.ssh\id_rsa.pub" -PathType Leaf) -or -not(Test-Path "$env:USERPROFILE\.ssh\id_rsa" -PathType Leaf)){echo 'y' | ssh-keygen.exe -f $env:USERPROFILE\.ssh\id_rsa -q -N '""'} type $env:USERPROFILE\.ssh\id_rsa.pub | Set-Clipboard
+
+
+**Second Solution:
+Run this command on terminal: 
+ssh-keygen -t rsa
+
+Run this command to copy the generated key:
+pbcopy <~/.ssh/id_rsa.pub
+
+
+Now go to GitHub settings.
+Under the Access section, select SSH and GPG keys
+Press the New SSH Key button:
+   Give your key a Title, something like "Personal PC" or "Work Laptop"
+   Past the contents of your clipboard into the Key section
+   Press Add SSH key
+
+Now you're done, have fun pushing your project.
